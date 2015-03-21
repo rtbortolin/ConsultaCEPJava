@@ -2,6 +2,6 @@ package consultaCEP.interfaces;
 
 import consultaCEP.implementation.*;
 
-public interface ICorreiosAccess {
+public interface ICorreiosWebAccess {
 	Address getResponse(String cep);
 }

@@ -18,7 +18,7 @@ import consultaCEP.interfaces.*;
  * @author Rafael
  *
  */
-public class CorreiosTest {
+public class CorreiosWebAccessTest {
 
 	/**
 	 * @throws java.lang.Exception
@@ -39,7 +39,7 @@ public class CorreiosTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		CorreiosAccess = new CorreiosAccess();
+		CorreiosAccess = new CorreiosWebAccess();
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class CorreiosTest {
 	public void tearDown() throws Exception {
 	}
 
-	private ICorreiosAccess CorreiosAccess;
+	private ICorreiosWebAccess CorreiosAccess;
 
 	@Test
 	public void get_response_test_should_return_null_if_invalid_cep() {

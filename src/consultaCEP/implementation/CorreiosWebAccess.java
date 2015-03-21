@@ -3,9 +3,9 @@ package consultaCEP.implementation;
 import java.io.*;
 import java.net.*;
 
-import consultaCEP.interfaces.ICorreiosAccess;
+import consultaCEP.interfaces.*;
 
-public class CorreiosAccess implements ICorreiosAccess {
+public class CorreiosWebAccess implements ICorreiosWebAccess {
 
 	@Override
 	public Address getResponse(String cep) {

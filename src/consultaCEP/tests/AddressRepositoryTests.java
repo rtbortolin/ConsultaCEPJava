@@ -6,8 +6,9 @@ import org.junit.*;
 
 import consultaCEP.implementation.Address;
 import consultaCEP.infra.db.AddressRepository;
+import consultaCEP.interfaces.IAddressRepository;
 
-public class MongoConnectionTests {
+public class AddressRepositoryTests {
 
 	@Before
 	public void setUp() throws Exception {
@@ -20,7 +21,7 @@ public class MongoConnectionTests {
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
 				"Jardim Ricetti", "São Carlos", "SP", cep);
 
-		AddressRepository repository = new AddressRepository();
+		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
 
 		repository = new AddressRepository();
@@ -37,7 +38,7 @@ public class MongoConnectionTests {
 
 	@Test
 	public void address_get_should_return_null_with_an_not_existing_cep() {
-		AddressRepository repository = new AddressRepository();
+		IAddressRepository repository = new AddressRepository();
 		Address address = repository.getAddres("00000-000");
 
 		assertNull(address);
@@ -49,7 +50,7 @@ public class MongoConnectionTests {
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
 				"Jardim Ricetti", "São Carlos", "SP", cep);
 
-		AddressRepository repository = new AddressRepository();
+		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
 
 		Address dbAddress = repository.getAddres(cep);
@@ -71,7 +72,7 @@ public class MongoConnectionTests {
 		String uf = "SP";
 		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
 
-		AddressRepository repository = new AddressRepository();
+		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
 
 		reference = new Address(updatedLogradouro, bairro, cidade, uf, cep);

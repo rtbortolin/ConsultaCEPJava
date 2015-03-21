@@ -4,9 +4,11 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import consultaCEP.implementation.Address;
 
-public class AddressRepository extends MongoConnection {
+import consultaCEP.implementation.Address;
+import consultaCEP.interfaces.IAddressRepository;
+
+public class AddressRepository extends MongoConnection implements IAddressRepository {
 
 	private DBCollection collection;
 
@@ -19,6 +21,10 @@ public class AddressRepository extends MongoConnection {
 		collection = db.getCollection("addresses");
 	}
 
+	/* (non-Javadoc)
+	 * @see consultaCEP.infra.db.IAddressRepository#getAddres(java.lang.String)
+	 */
+	@Override
 	public Address getAddres(String cep) {
 		openConnection();
 		DBCursor cursor = collection.find(new BasicDBObject("cep", cep));
@@ -33,6 +39,10 @@ public class AddressRepository extends MongoConnection {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see consultaCEP.infra.db.IAddressRepository#saveAddress(consultaCEP.implementation.Address)
+	 */
+	@Override
 	public void saveAddress(Address address) {
 
 		try {
