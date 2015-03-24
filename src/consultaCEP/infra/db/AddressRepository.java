@@ -4,7 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-import consultaCEP.implementation.Address;
+import consultaCEP.domain.entities.Address;
 import consultaCEP.interfaces.IAddressRepository;
 
 public class AddressRepository extends MongoConnection implements IAddressRepository {

@@ -10,7 +10,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-import consultaCEP.implementation.Search;
+import consultaCEP.domain.entities.Search;
 import consultaCEP.interfaces.ISearchRepository;
 
 public class SearchRepository extends MongoConnection implements

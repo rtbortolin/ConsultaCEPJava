@@ -7,8 +7,9 @@ import org.mockito.stubbing.Answer;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+import consultaCEP.domain.entities.Address;
+import consultaCEP.domain.services.*;
 import consultaCEP.interfaces.*;
-import consultaCEP.implementation.*;
 
 public class SearchCEPServiceTests {
 

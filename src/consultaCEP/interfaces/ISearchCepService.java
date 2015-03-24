@@ -1,6 +1,6 @@
 package consultaCEP.interfaces;
 
-import consultaCEP.implementation.Address;
+import consultaCEP.domain.entities.Address;
 
 public interface ISearchCepService {
 

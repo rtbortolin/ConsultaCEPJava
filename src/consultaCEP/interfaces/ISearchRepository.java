@@ -2,7 +2,7 @@ package consultaCEP.interfaces;
 
 import java.util.List;
 
-import consultaCEP.implementation.Search;
+import consultaCEP.domain.entities.Search;
 
 public interface ISearchRepository {
 		public Search insert(Search search);

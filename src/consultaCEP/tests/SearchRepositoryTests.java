@@ -1,10 +1,13 @@
 package consultaCEP.tests;
 
 import static org.junit.Assert.*;
+
 import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
-import consultaCEP.implementation.Search;
+
+import consultaCEP.domain.entities.Search;
 import consultaCEP.infra.db.SearchRepository;
 import consultaCEP.interfaces.ISearchRepository;
 

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import consultaCEP.implementation.Address;
+import consultaCEP.domain.entities.Address;
 import consultaCEP.infra.db.AddressRepository;
 import consultaCEP.interfaces.IAddressRepository;
 

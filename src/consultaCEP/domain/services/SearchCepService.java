@@ -1,7 +1,8 @@
-package consultaCEP.implementation;
+package consultaCEP.domain.services;
 
 import java.lang.Thread.State;
 
+import consultaCEP.domain.entities.Address;
 import consultaCEP.interfaces.IAddressRepository;
 import consultaCEP.interfaces.ICorreiosWebAccess;
 import consultaCEP.interfaces.ISearchCepService;

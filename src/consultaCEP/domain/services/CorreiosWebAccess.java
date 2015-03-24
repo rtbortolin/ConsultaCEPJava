@@ -1,8 +1,9 @@
-package consultaCEP.implementation;
+package consultaCEP.domain.services;
 
 import java.io.*;
 import java.net.*;
 
+import consultaCEP.domain.entities.Address;
 import consultaCEP.interfaces.*;
 
 public class CorreiosWebAccess implements ICorreiosWebAccess {

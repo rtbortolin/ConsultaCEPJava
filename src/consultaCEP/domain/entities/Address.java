@@ -1,4 +1,4 @@
-package consultaCEP.implementation;
+package consultaCEP.domain.entities;
 
 public class Address {
 	private String logradouro;

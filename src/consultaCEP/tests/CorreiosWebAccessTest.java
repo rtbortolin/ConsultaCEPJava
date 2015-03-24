@@ -11,7 +11,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import consultaCEP.implementation.*;
+import consultaCEP.domain.entities.Address;
+import consultaCEP.domain.services.*;
 import consultaCEP.interfaces.*;
 
 /**
