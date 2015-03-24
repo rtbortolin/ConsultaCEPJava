@@ -164,7 +164,7 @@ public class SearchCEPServiceTests {
 		String cep = "13570-003";
 		Address webAddress = new Address("webAddress", "", "", "", cep);
 		Address dbAddress = new Address("dbAddress", "", "", "", cep);
-		int threadWait = 1000;
+		int threadWait = 500;
 		
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {
@@ -203,7 +203,7 @@ public class SearchCEPServiceTests {
 		Address webAddress = new Address("webAddress", "", "", "", cep);
 		Address dbAddress = new Address("dbAddress", "", "", "", cep);
 
-		int threadWait = 1000;
+		int threadWait = 500;
 
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {

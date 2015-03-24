@@ -1,5 +1,7 @@
 package consultaCEP.infra.db;
 
+import java.util.Date;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
@@ -46,6 +48,7 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 	}
 
 	private void updateAddress(Address address) {
+		address.setUpdatedIn(new Date());
 		collection.update(new BasicDBObject("cep", address.getCep()),
 				convertAddress(address));
 	}
@@ -55,9 +58,14 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 		String cep = dbObject.getString("cep");
 		String bairro = dbObject.getString("bairro");
 		String cidade = dbObject.getString("cidade");
-		String uf = dbObject.getString("uf");
+		String uf = dbObject.getString("uf");		
+		Date createdIn = dbObject.getDate("created-in");
+		Date updatedIn = dbObject.getDate("updated-in");
 
-		return new Address(logradouro, bairro, cidade, uf, cep);
+		Address address = new Address(logradouro, bairro, cidade, uf, cep);
+		address.setCreatedIn(createdIn);
+		address.setUpdatedIn(updatedIn);
+		return address;
 	}
 
 	private DBObject convertAddress(Address address) {
@@ -68,6 +76,8 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 		dbo.put("bairro", address.getBairro());
 		dbo.put("cidade", address.getCidade());
 		dbo.put("uf", address.getUf());
+		dbo.put("created-in", address.getCreatedIn());
+		dbo.put("updated-in",address.getUpdatedIn());
 
 		return dbo;
 	}
