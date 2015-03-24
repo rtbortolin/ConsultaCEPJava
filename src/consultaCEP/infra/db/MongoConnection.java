@@ -14,6 +14,16 @@ public abstract class MongoConnection {
 
 	protected MongoClient mongoclient;
 	protected DB db;
+	protected DBCollection collection;
+
+	protected MongoConnection(String collectionName) {
+		openConnection();
+		boolean collectionExists = db.collectionExists(collectionName);
+		if (collectionExists == false) {
+			db.createCollection(collectionName, null);
+		}
+		collection = db.getCollection(collectionName);
+	}
 
 	protected boolean openConnection() {
 		try {
@@ -30,8 +40,8 @@ public abstract class MongoConnection {
 		if (mongoclient != null)
 			mongoclient.close();
 	}
-	
-	public void dropDataBase(){
+
+	public void dropDataBase() {
 		db.dropDatabase();
 	}
 

@@ -120,13 +120,4 @@ public class SearchCepService implements ISearchCepService {
 			Address = getAddressFromDb(Cep);
 		}
 	}
-
-	private class ProcessRunnable implements Runnable {
-
-		@Override
-		public void run() {
-
-		}
-
-	}
 }

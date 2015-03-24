@@ -1,7 +1,6 @@
 package consultaCEP.infra.db;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
@@ -10,20 +9,11 @@ import consultaCEP.interfaces.IAddressRepository;
 
 public class AddressRepository extends MongoConnection implements IAddressRepository {
 
-	private DBCollection collection;
-
 	public AddressRepository() {
-		openConnection();
-		boolean collectionExists = db.collectionExists("addresses");
-		if (collectionExists == false) {
-			db.createCollection("addresses", null);
-		}
-		collection = db.getCollection("addresses");
+		super("addresses");
+		collection.createIndex(new BasicDBObject("cep", 1), new BasicDBObject("unique", true));
 	}
 
-	/* (non-Javadoc)
-	 * @see consultaCEP.infra.db.IAddressRepository#getAddres(java.lang.String)
-	 */
 	@Override
 	public Address getAddres(String cep) {
 		openConnection();
@@ -39,9 +29,6 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see consultaCEP.infra.db.IAddressRepository#saveAddress(consultaCEP.implementation.Address)
-	 */
 	@Override
 	public void saveAddress(Address address) {
 
