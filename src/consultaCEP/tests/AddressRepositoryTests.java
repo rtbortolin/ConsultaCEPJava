@@ -2,6 +2,8 @@ package consultaCEP.tests;
 
 import static org.junit.Assert.*;
 
+import java.util.Date;
+
 import org.junit.*;
 
 import consultaCEP.domain.entities.Address;
@@ -85,5 +87,28 @@ public class AddressRepositoryTests {
 		assertEquals(cidade, dbAddress.getCidade());
 		assertEquals(uf, dbAddress.getUf());
 		assertEquals(cep, dbAddress.getCep());
+	}
+	
+	@Test
+	public void save_address_should_change_update_in_field(){
+		String cep = "13570-003";
+		String logradouro = "Rua Professor Paulo Monte Serrat";
+		String updatedLogradouro = logradouro + " - updated";
+		String bairro = "Jardim Ricetti";
+		String cidade = "São Carlos";
+		String uf = "SP";
+		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
+		
+		Date updatedInDate = reference.getUpdatedIn();
+
+		IAddressRepository repository = new AddressRepository();
+		repository.saveAddress(reference);
+
+		reference = new Address(updatedLogradouro, bairro, cidade, uf, cep);
+		repository.saveAddress(reference);
+
+		Address dbAddress = repository.getAddres(cep);
+
+		assertNotEquals(updatedInDate, dbAddress.getUpdatedIn());		
 	}
 }
