@@ -1,4 +1,4 @@
-package main.java;
+package main;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -68,6 +68,7 @@ public class Main extends HttpServlet {
 	}
 
 	public static void main(String[] args) throws Exception {
+		System.out.println("starting");
 		Server server = new Server(Integer.valueOf(System.getenv("PORT")));
 		ServletContextHandler context = new ServletContextHandler(
 				ServletContextHandler.SESSIONS);
