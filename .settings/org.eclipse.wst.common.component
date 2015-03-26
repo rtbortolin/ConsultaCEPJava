@@ -2,6 +2,7 @@
     <wb-module deploy-name="ConsultaCEP">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
         <property name="context-root" value="ConsultaCEP"/>
         <property name="java-output-path" value="/ConsultaCEP/target/classes"/>
     </wb-module>
