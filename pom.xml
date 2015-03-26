@@ -14,6 +14,7 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
+					<webXml>src\main\webapp\WEB-INF\web.xml</webXml> 
 				</configuration>
 			</plugin>
 		</plugins>
