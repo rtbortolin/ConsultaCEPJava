@@ -37,8 +37,10 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 		try {
 			openConnection();
 			Address dbAddress = getAddres(address.getCep());
-			if (dbAddress != null)
+			if (dbAddress != null){
+				address.setCreatedIn(dbAddress.getCreatedIn());
 				updateAddress(address);
+			}
 			else
 				collection.insert(convertAddress(address));
 

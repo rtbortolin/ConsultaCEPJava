@@ -41,42 +41,46 @@ public class SearchCepService implements ISearchCepService {
 						e.printStackTrace();
 					}
 				} while (webThread.getState() != State.TERMINATED
-						&& dbThread.getState() != State.TERMINATED);
+						|| (dbThread.getState() != State.TERMINATED && dbRunnable
+								.getAddress() != null));
 			}
 
 		});
 
 		mainThread.start();
-
-		Thread saveAddressThread = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				do {
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				} while (webThread.getState() != State.TERMINATED);
-				
-				AddressRepository.saveAddress(webRunnable.getAddress());
-			}
-
-		});
-		saveAddressThread.start();
-
 		try {
 			mainThread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
+		Thread saveAddressThread = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				while (webThread.getState() != State.TERMINATED) {
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+
+				AddressRepository.saveAddress(webRunnable.getAddress());
+			}
+
+		});
+		saveAddressThread.start();
+
 		Address returnAddress = null;
-		if (webThread.getState() == State.TERMINATED)
-			returnAddress = webRunnable.getAddress();
-		else if (dbThread.getState() == State.TERMINATED)
+		if (dbRunnable.getAddress() != null){
 			returnAddress = dbRunnable.getAddress();
+			System.out.println("cep: " + cep + " - db");
+		}
+		else if (webRunnable.getAddress() != null){
+			returnAddress = webRunnable.getAddress();
+			System.out.println("cep: " + cep + " - wb");
+		}
 
 		return returnAddress;
 	}

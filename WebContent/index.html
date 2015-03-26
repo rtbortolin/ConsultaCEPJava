@@ -1,0 +1,44 @@
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+<input type="text" id="txtCep"/>
+<input type="button" id="btnPesquisar" value="Procurar"/>
+<div id="result">
+<p>
+	<span>CEP: <span><label id="lblCep"/>
+</p>
+<p>
+	<span>Logradouro: <span><label id="lblLogradouro"/>
+</p>
+<p>
+	<span>Bairro: <span><label id="lblBairro"/>
+</p>
+<p>
+	<span>Cidade: <span><label id="lblCidade"/>
+	</p>
+<p>
+	<span>UF: <span><label id="lblUf"/>
+	</p>
+</div>
+<body>
+<script>
+$(document).ready(function(){
+    $('#result').hide();
+	$('#btnPesquisar').click(function(){
+	   $('#result').hide();
+	   var cep = $("#txtCep").val();
+	   var url = "http://localhost:8080/ConsultaCEP/api/cep/" + cep;
+	   $.get(url, function(data){
+			$('#lblCep').html(data.cep);
+			$('#lblLogradouro').html(data.logradouro);
+			$('#lblBairro').html(data.bairro);
+			$('#lblCidade').html(data.cidade);
+			$('#lblUf').html(data.uf);
+			$('#result').show();
+	   })
+	});
+});
+</script>
+</html>
