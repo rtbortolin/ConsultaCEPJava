@@ -29,7 +29,7 @@ $(document).ready(function(){
 	$('#btnPesquisar').click(function(){
 	   $('#result').hide();
 	   var cep = $("#txtCep").val();
-	   var url = "http://localhost:8080/ConsultaCEP/api/cep/" + cep;
+	   var url = "https://consulta-cep.herokuapp.com/api/cep/" + cep;
 	   $.get(url, function(data){
 			$('#lblCep').html(data.cep);
 			$('#lblLogradouro').html(data.logradouro);
