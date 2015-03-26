@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="ConsultaCEP">
+    <wb-module deploy-name="consulta-cep">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
-        <property name="context-root" value="ConsultaCEP"/>
-        <property name="java-output-path" value="/ConsultaCEP/target/classes"/>
+        <property name="java-output-path" value="/consulta-cep/target/classes"/>
+        <property name="context-root" value="consulta-cep"/>
     </wb-module>
 </project-modules>
