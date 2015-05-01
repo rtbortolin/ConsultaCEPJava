@@ -1,4 +1,4 @@
-package test;
+package test.java;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -24,7 +24,7 @@ public class SearchRepositoryTest {
 	}
 
 	@Test
-	public void insert_search_should_insert_a_search_in_db_Test() {
+	public void insert_search_should_insert_a_search_in_db() {
 		String cep = "13570-003";
 		Search search = new Search(cep);
 	
