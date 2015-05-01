@@ -23,8 +23,10 @@ public class SearchCepService implements ISearchCepService {
 	public Address getAddress(final String cep) {
 
 		Address result = Cache.getInstance().get(Address.class, cep);
-		if (result != null)
+		if (result != null) {
+			System.out.println("cep: " + cep + " - cache");
 			return result;
+		}
 
 		final WebRunnable webRunnable = new WebRunnable(cep);
 		final DbRunnable dbRunnable = new DbRunnable(cep);
