@@ -25,7 +25,7 @@ public class AddressRepositoryTest {
 	public void address_get_should_return_an_address_with_an_existing_cep() {
 		String cep = "13570-003";
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "SÃ£o Carlos", "SP", cep);
+				"Jardim Ricetti", "São Carlos", "SP", cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
@@ -54,7 +54,7 @@ public class AddressRepositoryTest {
 	public void save_address_should_persist_a_new_address() {
 		String cep = "13570-003";
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "SÃ£o Carlos", "SP", cep);
+				"Jardim Ricetti", "São Carlos", "SP", cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
@@ -74,7 +74,7 @@ public class AddressRepositoryTest {
 		String logradouro = "Rua Professor Paulo Monte Serrat";
 		String updatedLogradouro = logradouro + " - updated";
 		String bairro = "Jardim Ricetti";
-		String cidade = "SÃ£o Carlos";
+		String cidade = "São Carlos";
 		String uf = "SP";
 		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
 
@@ -99,7 +99,7 @@ public class AddressRepositoryTest {
 		String logradouro = "Rua Professor Paulo Monte Serrat";
 		String updatedLogradouro = logradouro + " - updated";
 		String bairro = "Jardim Ricetti";
-		String cidade = "SÃ£o Carlos";
+		String cidade = "São Carlos";
 		String uf = "SP";
 		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
 		

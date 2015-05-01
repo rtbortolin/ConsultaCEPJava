@@ -14,3 +14,7 @@ encoding//src/main/java/consultaCEP/web/api/CepController.java=UTF-8
 encoding//src/main/java/launch/Main.java=UTF-8
 encoding//src/main/webapp/WEB-INF/web.xml=UTF-8
 encoding//src/main/webapp/index.html=UTF-8
+encoding//src/test/java/AddressRepositoryTest.java=ISO-8859-1
+encoding//src/test/java/CorreiosWebAccessTest.java=ISO-8859-1
+encoding//src/test/java/SearchCEPServiceTest.java=ISO-8859-1
+encoding//src/test/java/SearchRepositoryTest.java=ISO-8859-1

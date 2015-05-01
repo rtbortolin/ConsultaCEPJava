@@ -46,5 +46,4 @@ public class SearchRepositoryTest {
 		assertNotNull(searches);
 		assertEquals(1, searches.size());
 	}
-
 }
