@@ -3,6 +3,7 @@ package main.java.consultaCEP.domain.services;
 import java.lang.Thread.State;
 
 import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.infra.Cache;
 import main.java.consultaCEP.interfaces.IAddressRepository;
 import main.java.consultaCEP.interfaces.ICorreiosWebAccess;
 import main.java.consultaCEP.interfaces.ISearchCepService;
@@ -20,6 +21,10 @@ public class SearchCepService implements ISearchCepService {
 
 	@Override
 	public Address getAddress(final String cep) {
+
+		Address result = Cache.get(Address.class, cep);
+		if (result != null)
+			return result;
 
 		final WebRunnable webRunnable = new WebRunnable(cep);
 		final DbRunnable dbRunnable = new DbRunnable(cep);
@@ -84,6 +89,7 @@ public class SearchCepService implements ISearchCepService {
 			System.out.println("cep: " + cep + " - wb");
 		}
 
+		Cache.put(cep, returnAddress);
 		return returnAddress;
 	}
 

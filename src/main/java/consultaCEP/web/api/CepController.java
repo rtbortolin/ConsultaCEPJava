@@ -41,7 +41,8 @@ public class CepController {
 
 		ResponseBuilder responseBuilder = Response.status(200).entity(address);
 		CacheControl cache = new CacheControl();
-		cache.setMaxAge(86400);
+		//cache.setMaxAge(86400);
+		cache.setMaxAge(1);
 		cache.setPrivate(true);
 		responseBuilder.cacheControl(cache);
 		Response corsResponse = createCorsResponse(responseBuilder.build());
