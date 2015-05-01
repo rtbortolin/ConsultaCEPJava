@@ -44,6 +44,7 @@ public class MongoConnection {
 	}
 
 	private MongoConnection(String collectionName) {
+		System.out.println("MongoConnection instantiated " + collectionName);
 		openConnection();
 		boolean collectionExists = db.collectionExists(collectionName);
 		if (collectionExists == false) {
