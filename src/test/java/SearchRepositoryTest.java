@@ -19,7 +19,7 @@ public class SearchRepositoryTest {
 	@Before
 	public void setUp() {
 		SearchRepository repo = new SearchRepository();
-		repo.dropDataBase();
+		repo.connection.dropDataBase();
 		repository = repo;
 	}
 

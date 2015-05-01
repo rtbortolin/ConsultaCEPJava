@@ -20,9 +20,11 @@ public class CepController {
 	private static ISearchCepService service;
 
 	public CepController() {
-		if (service == null)
+		if (service == null) {
 			service = new SearchCepService(new CorreiosWebAccess(),
 					new AddressRepository());
+			System.out.println("ISearchCepService instantiated");
+		}
 	}
 
 	@Path("{cep}")

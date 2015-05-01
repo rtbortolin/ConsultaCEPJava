@@ -55,7 +55,7 @@ public class SearchCEPServiceTest {
 
 	@Test
 	public void get_address_should_call_both_mock() {
-		String cep = "13570-003";
+		String cep = "00000-000";
 
 		SearchCepService.getAddress(cep);
 
@@ -237,6 +237,45 @@ public class SearchCEPServiceTest {
 		verify(CorreiosWebAccessMock, times(1)).getResponse(cep);
 		verify(AddressRepositoryMock, times(1)).getAddres(cep);
 		verify(AddressRepositoryMock, times(1)).saveAddress(webAddress);
+
+		assertSame(dbAddress, address);
+	}
+	
+	@Test
+	public void get_address_should_not_save_the_returned_addres_from_web_when_null()
+			throws InterruptedException {
+		String cep = "123456-789";
+		final Address webAddress = null;
+		final Address dbAddress = null;
+
+		final int threadWait = 500;
+
+		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
+				new Answer<Address>() {
+					@Override
+					public Address answer(InvocationOnMock invocation)
+							throws Throwable {
+						Thread.sleep(threadWait);
+						return webAddress;
+					}
+				});
+
+		when(this.AddressRepositoryMock.getAddres(cep)).thenAnswer(
+				new Answer<Address>() {
+					@Override
+					public Address answer(InvocationOnMock invocation)
+							throws Throwable {
+						return dbAddress;
+					}
+				});
+
+		Address address = SearchCepService.getAddress(cep);
+
+		Thread.sleep(threadWait + 500);
+
+		verify(CorreiosWebAccessMock, times(1)).getResponse(cep);
+		verify(AddressRepositoryMock, times(1)).getAddres(cep);
+		verify(AddressRepositoryMock, times(0)).saveAddress(webAddress);
 
 		assertSame(dbAddress, address);
 	}

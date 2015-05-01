@@ -65,7 +65,10 @@ public class SearchCepService implements ISearchCepService {
 						e.printStackTrace();
 					}
 				}
-
+				if (webRunnable.getAddress() == null) {
+					System.out.println("cep: " + cep + " - nf");
+					return;
+				}
 				AddressRepository.saveAddress(webRunnable.getAddress());
 			}
 
@@ -73,11 +76,10 @@ public class SearchCepService implements ISearchCepService {
 		saveAddressThread.start();
 
 		Address returnAddress = null;
-		if (dbRunnable.getAddress() != null){
+		if (dbRunnable.getAddress() != null) {
 			returnAddress = dbRunnable.getAddress();
 			System.out.println("cep: " + cep + " - db");
-		}
-		else if (webRunnable.getAddress() != null){
+		} else if (webRunnable.getAddress() != null) {
 			returnAddress = webRunnable.getAddress();
 			System.out.println("cep: " + cep + " - wb");
 		}

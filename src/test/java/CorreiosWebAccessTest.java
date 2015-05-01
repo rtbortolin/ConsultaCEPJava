@@ -98,4 +98,10 @@ public class CorreiosWebAccessTest {
 		assertEquals(reference.getCep(), response.getCep());
 	}
 
+	@Test
+	public void get_response_test_should_return_null_if_not_found_cep() {
+		Address response = CorreiosAccess.getResponse("123456-789");
+
+		assertNull(response);
+	}
 }

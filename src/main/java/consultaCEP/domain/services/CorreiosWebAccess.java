@@ -15,6 +15,11 @@ public class CorreiosWebAccess implements ICorreiosWebAccess {
 			return null;
 
 		String html = getHtml(cep);
+
+		if (html.contains("O endereço informado " + cep
+				+ " não foi encontrado."))
+			return null;
+
 		String logradouro = getLogradouro(html);
 		String bairro = getBairro(html);
 		String cidade = getCidade(html);
@@ -70,7 +75,8 @@ public class CorreiosWebAccess implements ICorreiosWebAccess {
 
 			// Get Response
 			InputStream is = connection.getInputStream();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("ISO-8859-1")));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is,
+					Charset.forName("ISO-8859-1")));
 			String line;
 			StringBuffer response = new StringBuffer();
 			while ((line = rd.readLine()) != null) {

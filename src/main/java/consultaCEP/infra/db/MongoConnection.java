@@ -1,22 +1,49 @@
 package main.java.consultaCEP.infra.db;
 
-import com.mongodb.*;
-
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class MongoConnection {
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
-	private String dbname = "consultacep_dev";
-	private String user = "usr_consultacep";
-	private String password = "F3n1x";
-	private String connectionString = "mongodb://" + user + ":" + password
-			+ "@ds053139.mongolab.com:53139/consultacep_dev";
+public class MongoConnection {
 
-	protected MongoClient mongoclient;
-	protected DB db;
-	protected DBCollection collection;
+	private String dbname = DBConfiguration.getDbName();
+	private String connectionString = DBConfiguration.getDbConnectionString();
 
-	protected MongoConnection(String collectionName) {
+	private MongoClient mongoclient;
+	private DB db;
+	private DBCollection collection;
+
+	private static Map<String, MongoConnection> connections;
+
+	public static MongoConnection Instance(String collection) {
+		if (connections == null)
+			connections = new HashMap<String, MongoConnection>();
+
+		MongoConnection connection = connections.get(collection);
+		if (connection == null)
+			connection = new MongoConnection(collection);
+
+		return connection;
+	}
+
+	public DBCollection getCollection() {
+		return collection;
+	}
+
+	public DB getDB() {
+		return db;
+	}
+
+	public MongoClient getMongoClient() {
+		return mongoclient;
+	}
+
+	private MongoConnection(String collectionName) {
 		openConnection();
 		boolean collectionExists = db.collectionExists(collectionName);
 		if (collectionExists == false) {
@@ -44,5 +71,4 @@ public abstract class MongoConnection {
 	public void dropDataBase() {
 		db.dropDatabase();
 	}
-
 }

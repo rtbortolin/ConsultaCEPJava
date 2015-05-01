@@ -9,17 +9,21 @@ import com.mongodb.DBObject;
 import main.java.consultaCEP.domain.entities.Address;
 import main.java.consultaCEP.interfaces.IAddressRepository;
 
-public class AddressRepository extends MongoConnection implements IAddressRepository {
+public class AddressRepository extends BaseRepository implements
+		IAddressRepository {
 
 	public AddressRepository() {
 		super("addresses");
-		collection.createIndex(new BasicDBObject("cep", 1), new BasicDBObject("unique", true));
+
+		connection.getCollection().createIndex(new BasicDBObject("cep", 1),
+				new BasicDBObject("unique", true));
 	}
 
 	@Override
 	public Address getAddres(String cep) {
-		openConnection();
-		DBCursor cursor = collection.find(new BasicDBObject("cep", cep));
+		connection.openConnection();
+		DBCursor cursor = connection.getCollection().find(
+				new BasicDBObject("cep", cep));
 		try {
 			while (cursor.hasNext()) {
 				return fillAddress((BasicDBObject) cursor.next());
@@ -27,7 +31,7 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 			return null;
 		} finally {
 			cursor.close();
-			closeConnection();
+			connection.closeConnection();
 		}
 	}
 
@@ -35,23 +39,23 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 	public void saveAddress(Address address) {
 
 		try {
-			openConnection();
+			connection.openConnection();
 			Address dbAddress = getAddres(address.getCep());
-			if (dbAddress != null){
+			if (dbAddress != null) {
 				address.setCreatedIn(dbAddress.getCreatedIn());
 				updateAddress(address);
-			}
-			else
-				collection.insert(convertAddress(address));
+			} else
+				connection.getCollection().insert(convertAddress(address));
 
 		} finally {
-			closeConnection();
+			connection.closeConnection();
 		}
 	}
 
 	private void updateAddress(Address address) {
 		address.setUpdatedIn(new Date());
-		collection.update(new BasicDBObject("cep", address.getCep()),
+		connection.getCollection().update(
+				new BasicDBObject("cep", address.getCep()),
 				convertAddress(address));
 	}
 
@@ -60,7 +64,7 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 		String cep = dbObject.getString("cep");
 		String bairro = dbObject.getString("bairro");
 		String cidade = dbObject.getString("cidade");
-		String uf = dbObject.getString("uf");		
+		String uf = dbObject.getString("uf");
 		Date createdIn = dbObject.getDate("created-in");
 		Date updatedIn = dbObject.getDate("updated-in");
 
@@ -79,7 +83,7 @@ public class AddressRepository extends MongoConnection implements IAddressReposi
 		dbo.put("cidade", address.getCidade());
 		dbo.put("uf", address.getUf());
 		dbo.put("created-in", address.getCreatedIn());
-		dbo.put("updated-in",address.getUpdatedIn());
+		dbo.put("updated-in", address.getUpdatedIn());
 
 		return dbo;
 	}

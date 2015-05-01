@@ -9,6 +9,7 @@ import java.util.Date;
 
 import main.java.consultaCEP.domain.entities.Address;
 import main.java.consultaCEP.infra.db.AddressRepository;
+import main.java.consultaCEP.infra.db.MongoConnection;
 import main.java.consultaCEP.interfaces.IAddressRepository;
 
 import org.junit.Before;
@@ -18,7 +19,9 @@ public class AddressRepositoryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		new AddressRepository().dropDataBase();
+		AddressRepository repo = new AddressRepository();
+		MongoConnection connection = repo.connection;
+		connection.dropDataBase();
 	}
 
 	@Test
@@ -92,9 +95,9 @@ public class AddressRepositoryTest {
 		assertEquals(uf, dbAddress.getUf());
 		assertEquals(cep, dbAddress.getCep());
 	}
-	
+
 	@Test
-	public void save_address_should_change_update_in_field(){
+	public void save_address_should_change_update_in_field() {
 		String cep = "13570-003";
 		String logradouro = "Rua Professor Paulo Monte Serrat";
 		String updatedLogradouro = logradouro + " - updated";
@@ -102,7 +105,7 @@ public class AddressRepositoryTest {
 		String cidade = "São Carlos";
 		String uf = "SP";
 		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
-		
+
 		Date updatedInDate = reference.getUpdatedIn();
 
 		IAddressRepository repository = new AddressRepository();
@@ -113,6 +116,6 @@ public class AddressRepositoryTest {
 
 		Address dbAddress = repository.getAddres(cep);
 
-		assertNotEquals(updatedInDate, dbAddress.getUpdatedIn());		
+		assertNotEquals(updatedInDate, dbAddress.getUpdatedIn());
 	}
 }

@@ -13,7 +13,7 @@ import com.mongodb.DBObject;
 import main.java.consultaCEP.domain.entities.Search;
 import main.java.consultaCEP.interfaces.ISearchRepository;
 
-public class SearchRepository extends MongoConnection implements
+public class SearchRepository extends BaseRepository implements
 		ISearchRepository {
 
 	public SearchRepository() {
@@ -23,12 +23,12 @@ public class SearchRepository extends MongoConnection implements
 	@Override
 	public Search insert(Search search) {
 		try {
-			openConnection();
+			connection.openConnection();
 			DBObject obj = convert(search);
-			collection.insert(obj);
+			connection.getCollection().insert(obj);
 			return fill((BasicDBObject) obj);
 		} finally {
-			closeConnection();
+			connection.closeConnection();
 		}
 	}
 
@@ -36,14 +36,14 @@ public class SearchRepository extends MongoConnection implements
 	public List<Search> list() {
 		List<Search> searches = new ArrayList<Search>();
 
-		openConnection();
-		DBCursor cursor = collection.find();
+		connection.openConnection();
+		DBCursor cursor = connection.getCollection().find();
 		try {
 			while (cursor.hasNext()) {
 				searches.add(fill((BasicDBObject) cursor.next()));
 			}
 		} finally {
-			closeConnection();
+			connection.closeConnection();
 		}
 		return searches;
 	}
