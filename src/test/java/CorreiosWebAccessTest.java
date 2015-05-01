@@ -61,7 +61,7 @@ public class CorreiosWebAccessTest {
 		Address response = CorreiosAccess.getResponse("13570-003");
 
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "São Carlos", "SP", "13570-003");
+				"Jardim Ricetti", "SÃ£o Carlos", "SP", "13570-003");
 
 		assertEquals(reference.getLogradouro(), response.getLogradouro());
 		assertEquals(reference.getBairro(), response.getBairro());
@@ -74,8 +74,8 @@ public class CorreiosWebAccessTest {
 	public void get_response_test_should_return_address_if_valid_cep_2() {
 		Address response = CorreiosAccess.getResponse("14403-720");
 
-		Address reference = new Address("Avenida São Vicente - lado ímpar",
-				"Jardim Noêmia", "Franca", "SP", "14403-720");
+		Address reference = new Address("Avenida SÃ£o Vicente - lado Ã­mpar",
+				"Jardim NoÃªmia", "Franca", "SP", "14403-720");
 
 		assertEquals(reference.getLogradouro(), response.getLogradouro());
 		assertEquals(reference.getBairro(), response.getBairro());
@@ -88,7 +88,7 @@ public class CorreiosWebAccessTest {
 	public void get_response_test_should_return_address_if_valid_cep_3() {
 		Address response = CorreiosAccess.getResponse("21010-790");
 
-		Address reference = new Address("Praça Getúlio Vargas",
+		Address reference = new Address("PraÃ§a GetÃºlio Vargas",
 				"Parada de Lucas", "Rio de Janeiro", "RJ", "21010-790");
 
 		assertEquals(reference.getLogradouro(), response.getLogradouro());
