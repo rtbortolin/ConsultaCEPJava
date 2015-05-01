@@ -1,6 +1,6 @@
-package consultaCEP.interfaces;
+package main.java.consultaCEP.interfaces;
 
-import consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.domain.entities.Address;
 
 public interface IAddressRepository {
 

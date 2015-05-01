@@ -1,15 +1,21 @@
-package consultaCEP.tests;
+package main.java.consultaCEP.tests;
+
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.domain.services.SearchCepService;
+import main.java.consultaCEP.interfaces.IAddressRepository;
+import main.java.consultaCEP.interfaces.ICorreiosWebAccess;
+import main.java.consultaCEP.interfaces.ISearchCepService;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import consultaCEP.domain.entities.Address;
-import consultaCEP.domain.services.*;
-import consultaCEP.interfaces.*;
 
 public class SearchCEPServiceTests {
 
@@ -60,8 +66,8 @@ public class SearchCEPServiceTests {
 	@Test
 	public void get_address_should_return_addres_from_any_mock() {
 		String cep = "13570-003";
-		Address webAddress = new Address("webAddress", "", "", "", cep);
-		Address dbAddress = new Address("dbAddress", "", "", "", cep);
+		final Address webAddress = new Address("webAddress", "", "", "", cep);
+		final Address dbAddress = new Address("dbAddress", "", "", "", cep);
 
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {
@@ -95,8 +101,8 @@ public class SearchCEPServiceTests {
 	@Test
 	public void get_address_should_return_addres_from_faster_mock_1() {
 		String cep = "13570-003";
-		Address webAddress = new Address("webAddress", "", "", "", cep);
-		Address dbAddress = new Address("dbAddress", "", "", "", cep);
+		final Address webAddress = new Address("webAddress", "", "", "", cep);
+		final Address dbAddress = new Address("dbAddress", "", "", "", cep);
 		
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {
@@ -128,8 +134,8 @@ public class SearchCEPServiceTests {
 	@Test
 	public void get_address_should_return_addres_from_faster_mock_2() {
 		String cep = "13570-003";
-		Address webAddress = new Address("webAddress", "", "", "", cep);
-		Address dbAddress = new Address("dbAddress", "", "", "", cep);
+		final Address webAddress = new Address("webAddress", "", "", "", cep);
+		final Address dbAddress = new Address("dbAddress", "", "", "", cep);
 
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {
@@ -162,9 +168,9 @@ public class SearchCEPServiceTests {
 	@Test
 	public void get_address_should_update_or_save_the_returned_addres_from_web_1() throws InterruptedException {
 		String cep = "13570-003";
-		Address webAddress = new Address("webAddress", "", "", "", cep);
-		Address dbAddress = new Address("dbAddress", "", "", "", cep);
-		int threadWait = 500;
+		final Address webAddress = new Address("webAddress", "", "", "", cep);
+		final Address dbAddress = new Address("dbAddress", "", "", "", cep);
+		final int threadWait = 500;
 		
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {
@@ -200,10 +206,10 @@ public class SearchCEPServiceTests {
 	public void get_address_should_update_or_save_the_returned_addres_from_web_2()
 			throws InterruptedException {
 		String cep = "13570-003";
-		Address webAddress = new Address("webAddress", "", "", "", cep);
-		Address dbAddress = new Address("dbAddress", "", "", "", cep);
+		final Address webAddress = new Address("webAddress", "", "", "", cep);
+		final Address dbAddress = new Address("dbAddress", "", "", "", cep);
 
-		int threadWait = 500;
+		final int threadWait = 500;
 
 		when(this.CorreiosWebAccessMock.getResponse(cep)).thenAnswer(
 				new Answer<Address>() {

@@ -1,4 +1,4 @@
-package consultaCEP.infra.db;
+package main.java.consultaCEP.infra.db;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,8 +10,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-import consultaCEP.domain.entities.Search;
-import consultaCEP.interfaces.ISearchRepository;
+import main.java.consultaCEP.domain.entities.Search;
+import main.java.consultaCEP.interfaces.ISearchRepository;
 
 public class SearchRepository extends MongoConnection implements
 		ISearchRepository {

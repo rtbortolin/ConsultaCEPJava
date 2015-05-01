@@ -1,10 +1,11 @@
-package consultaCEP.domain.services;
+package main.java.consultaCEP.domain.services;
 
 import java.io.*;
 import java.net.*;
+import java.nio.charset.Charset;
 
-import consultaCEP.domain.entities.Address;
-import consultaCEP.interfaces.*;
+import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.interfaces.*;
 
 public class CorreiosWebAccess implements ICorreiosWebAccess {
 
@@ -37,6 +38,7 @@ public class CorreiosWebAccess implements ICorreiosWebAccess {
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("Content-Type",
 					"application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Language", "pt-BR");
 
 			StringBuffer sbuffer = new StringBuffer();
 			sbuffer.append("relaxation=" + URLEncoder.encode(cep, "UTF-8"));
@@ -54,7 +56,6 @@ public class CorreiosWebAccess implements ICorreiosWebAccess {
 
 			connection.setRequestProperty("Content-Length",
 					"" + Integer.toString(urlParameters.getBytes().length));
-			connection.setRequestProperty("Content-Language", "en-US");
 
 			connection.setUseCaches(false);
 			connection.setDoInput(true);
@@ -69,7 +70,7 @@ public class CorreiosWebAccess implements ICorreiosWebAccess {
 
 			// Get Response
 			InputStream is = connection.getInputStream();
-			BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+			BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("ISO-8859-1")));
 			String line;
 			StringBuffer response = new StringBuffer();
 			while ((line = rd.readLine()) != null) {

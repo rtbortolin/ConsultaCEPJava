@@ -1,11 +1,11 @@
-package consultaCEP.domain.services;
+package main.java.consultaCEP.domain.services;
 
 import java.lang.Thread.State;
 
-import consultaCEP.domain.entities.Address;
-import consultaCEP.interfaces.IAddressRepository;
-import consultaCEP.interfaces.ICorreiosWebAccess;
-import consultaCEP.interfaces.ISearchCepService;
+import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.interfaces.IAddressRepository;
+import main.java.consultaCEP.interfaces.ICorreiosWebAccess;
+import main.java.consultaCEP.interfaces.ISearchCepService;
 
 public class SearchCepService implements ISearchCepService {
 
@@ -21,11 +21,11 @@ public class SearchCepService implements ISearchCepService {
 	@Override
 	public Address getAddress(String cep) {
 
-		WebRunnable webRunnable = new WebRunnable(cep);
-		DbRunnable dbRunnable = new DbRunnable(cep);
+		final WebRunnable webRunnable = new WebRunnable(cep);
+		final DbRunnable dbRunnable = new DbRunnable(cep);
 
-		Thread webThread = new Thread(webRunnable);
-		Thread dbThread = new Thread(dbRunnable);
+		final Thread webThread = new Thread(webRunnable);
+		final Thread dbThread = new Thread(dbRunnable);
 
 		webThread.start();
 		dbThread.start();
@@ -54,7 +54,7 @@ public class SearchCepService implements ISearchCepService {
 			e.printStackTrace();
 		}
 
-		Thread saveAddressThread = new Thread(new Runnable() {
+		final Thread saveAddressThread = new Thread(new Runnable() {
 
 			@Override
 			public void run() {
