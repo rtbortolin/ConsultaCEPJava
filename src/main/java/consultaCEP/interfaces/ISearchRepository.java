@@ -1,8 +1,8 @@
-package consultaCEP.interfaces;
+package main.java.consultaCEP.interfaces;
 
 import java.util.List;
 
-import consultaCEP.domain.entities.Search;
+import main.java.consultaCEP.domain.entities.Search;
 
 public interface ISearchRepository {
 		public Search insert(Search search);

@@ -1,4 +1,4 @@
-package consultaCEP.domain.entities;
+package main.java.consultaCEP.domain.entities;
 
 import java.util.Date;
 

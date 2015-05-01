@@ -1,4 +1,4 @@
-package consultaCEP.infra.db;
+package main.java.consultaCEP.infra.db;
 
 import com.mongodb.*;
 

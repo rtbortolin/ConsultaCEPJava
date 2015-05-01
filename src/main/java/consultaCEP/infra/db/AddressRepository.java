@@ -1,4 +1,4 @@
-package consultaCEP.infra.db;
+package main.java.consultaCEP.infra.db;
 
 import java.util.Date;
 
@@ -6,8 +6,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-import consultaCEP.domain.entities.Address;
-import consultaCEP.interfaces.IAddressRepository;
+import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.interfaces.IAddressRepository;
 
 public class AddressRepository extends MongoConnection implements IAddressRepository {
 

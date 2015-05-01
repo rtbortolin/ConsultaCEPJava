@@ -1,4 +1,57 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<<<<<<< HEAD
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.heroku.sample</groupId>
+  <artifactId>embeddedTomcatSample</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>embeddedTomcatSample Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <tomcat.version>7.0.57</tomcat.version>
+  </properties>
+  <dependencies>
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-core</artifactId>
+        <version>${tomcat.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-logging-juli</artifactId>
+        <version>${tomcat.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <version>${tomcat.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jasper</artifactId>
+        <version>${tomcat.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jasper-el</artifactId>
+        <version>${tomcat.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-jsp-api</artifactId>
+        <version>${tomcat.version}</version>
+    </dependency>
+<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+=======
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>consulta-cep</groupId>
@@ -53,6 +106,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
+>>>>>>> 5064620fd06ae6063390ee28b917f078b26abc47
 		</dependency>
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -60,6 +114,17 @@
 			<version>2.12.5</version>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+		</dependency>		
+=======
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
@@ -70,17 +135,21 @@
 			<artifactId>asm</artifactId>
 			<version>3.3.1</version>
 		</dependency>
+>>>>>>> 5064620fd06ae6063390ee28b917f078b26abc47
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-bundle</artifactId>
 			<version>1.19</version>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
+=======
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>20140107</version>
 		</dependency>
 		<dependency>
+>>>>>>> 5064620fd06ae6063390ee28b917f078b26abc47
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>1.19</version>
@@ -89,12 +158,58 @@
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-core</artifactId>
 			<version>1.19</version>
+<<<<<<< HEAD
+		</dependency>	
+=======
 		</dependency>
+>>>>>>> 5064620fd06ae6063390ee28b917f078b26abc47
 		<dependency>
 			<groupId>com.owlike</groupId>
 			<artifactId>genson</artifactId>
 			<version>0.99</version>
+<<<<<<< HEAD
+		</dependency>	    
+  </dependencies>
+  <build>
+    <finalName>embeddedTomcatSample</finalName>
+    <plugins>
+        <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-compiler-plugin</artifactId>
+           <version>2.3.2</version>
+           <inherited>true</inherited>
+           <configuration>
+                 <source>1.6</source>
+                 <target>1.6</target>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>appassembler-maven-plugin</artifactId>
+            <version>1.1.1</version>
+            <configuration>
+                <assembleDirectory>target</assembleDirectory>
+                <programs>
+                    <program>
+                        <mainClass>main.java.launch.Main</mainClass>
+                        <name>webapp</name>
+                    </program>
+                </programs>
+            </configuration>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>assemble</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+  </build>
+=======
 		</dependency>
 	</dependencies>
 	<packaging>war</packaging>
+>>>>>>> 5064620fd06ae6063390ee28b917f078b26abc47
 </project>

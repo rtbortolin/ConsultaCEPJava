@@ -1,15 +1,16 @@
-package consultaCEP.tests;
+package main.java.consultaCEP.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import main.java.consultaCEP.domain.entities.Search;
+import main.java.consultaCEP.infra.db.SearchRepository;
+import main.java.consultaCEP.interfaces.ISearchRepository;
+
 import org.junit.Before;
 import org.junit.Test;
-
-import consultaCEP.domain.entities.Search;
-import consultaCEP.infra.db.SearchRepository;
-import consultaCEP.interfaces.ISearchRepository;
 
 public class SearchRepositoryTests {
 

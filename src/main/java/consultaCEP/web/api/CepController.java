@@ -1,4 +1,4 @@
-package consultaCEP.web.api;
+package main.java.consultaCEP.web.api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -8,11 +8,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
-import consultaCEP.domain.entities.Address;
-import consultaCEP.domain.services.CorreiosWebAccess;
-import consultaCEP.domain.services.SearchCepService;
-import consultaCEP.infra.db.AddressRepository;
-import consultaCEP.interfaces.ISearchCepService;
+import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.domain.services.CorreiosWebAccess;
+import main.java.consultaCEP.domain.services.SearchCepService;
+import main.java.consultaCEP.infra.db.AddressRepository;
+import main.java.consultaCEP.interfaces.ISearchCepService;
 
 @Path("/cep")
 public class CepController {
@@ -27,7 +27,7 @@ public class CepController {
 
 	@Path("{cep}")
 	@GET
-	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCep(@PathParam("cep") String cep) {
 
 		Address address = service.getAddress(cep);

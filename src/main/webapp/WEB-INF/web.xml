@@ -9,6 +9,24 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+<<<<<<< HEAD
+<servlet>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<servlet-class>
+                     com.sun.jersey.spi.container.servlet.ServletContainer
+                </servlet-class>
+		<init-param>
+		     <param-name>com.sun.jersey.config.property.packages</param-name>
+		     <param-value>main.java.consultaCEP.web.api</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+ 
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/api/*</url-pattern>
+	</servlet-mapping>
+=======
   <servlet>
     <servlet-name>consulta-cep api</servlet-name>
     <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -18,4 +36,5 @@
     <servlet-name>consulta-cep api</servlet-name>
     <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
+>>>>>>> 5064620fd06ae6063390ee28b917f078b26abc47
 </web-app>

@@ -1,14 +1,18 @@
-package consultaCEP.tests;
+package main.java.consultaCEP.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.Date;
 
-import org.junit.*;
+import main.java.consultaCEP.domain.entities.Address;
+import main.java.consultaCEP.infra.db.AddressRepository;
+import main.java.consultaCEP.interfaces.IAddressRepository;
 
-import consultaCEP.domain.entities.Address;
-import consultaCEP.infra.db.AddressRepository;
-import consultaCEP.interfaces.IAddressRepository;
+import org.junit.Before;
+import org.junit.Test;
 
 public class AddressRepositoryTests {
 
@@ -21,7 +25,7 @@ public class AddressRepositoryTests {
 	public void address_get_should_return_an_address_with_an_existing_cep() {
 		String cep = "13570-003";
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "São Carlos", "SP", cep);
+				"Jardim Ricetti", "SÃ£o Carlos", "SP", cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
@@ -50,7 +54,7 @@ public class AddressRepositoryTests {
 	public void save_address_should_persist_a_new_address() {
 		String cep = "13570-003";
 		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "São Carlos", "SP", cep);
+				"Jardim Ricetti", "SÃ£o Carlos", "SP", cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
@@ -70,7 +74,7 @@ public class AddressRepositoryTests {
 		String logradouro = "Rua Professor Paulo Monte Serrat";
 		String updatedLogradouro = logradouro + " - updated";
 		String bairro = "Jardim Ricetti";
-		String cidade = "São Carlos";
+		String cidade = "SÃ£o Carlos";
 		String uf = "SP";
 		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
 
@@ -95,7 +99,7 @@ public class AddressRepositoryTests {
 		String logradouro = "Rua Professor Paulo Monte Serrat";
 		String updatedLogradouro = logradouro + " - updated";
 		String bairro = "Jardim Ricetti";
-		String cidade = "São Carlos";
+		String cidade = "SÃ£o Carlos";
 		String uf = "SP";
 		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
 		
