@@ -8,6 +8,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
+import org.apache.commons.lang3.time.StopWatch;
+
 import main.java.consultaCEP.domain.entities.Address;
 import main.java.consultaCEP.domain.services.CorreiosWebAccess;
 import main.java.consultaCEP.domain.services.SearchCepService;
@@ -31,11 +33,16 @@ public class CepController {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCep(@PathParam("cep") String cep) {
-
+		StopWatch sw = new StopWatch();
+		sw.start();
 		Address address = service.getAddress(cep);
 
 		Response response = Response.status(200).entity(address).build();
-		return createCorsResponse(response);
+		Response corsResponse = createCorsResponse(response);
+		
+		sw.stop();
+		System.out.println("Request time: " + cep + " | " + sw);
+		return corsResponse;
 	}
 
 	private Response createCorsResponse(Response contResp) {

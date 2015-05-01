@@ -86,6 +86,13 @@
 			<artifactId>genson</artifactId>
 			<version>0.99</version>
 		</dependency>
+		<!-- just for StopWatch =\ -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>embeddedTomcatSample</finalName>
