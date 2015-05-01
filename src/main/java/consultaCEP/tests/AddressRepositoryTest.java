@@ -14,7 +14,7 @@ import main.java.consultaCEP.interfaces.IAddressRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AddressRepositoryTests {
+public class AddressRepositoryTest {
 
 	@Before
 	public void setUp() throws Exception {

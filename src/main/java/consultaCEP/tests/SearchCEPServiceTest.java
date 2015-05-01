@@ -17,7 +17,7 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-public class SearchCEPServiceTests {
+public class SearchCEPServiceTest {
 
 	private ICorreiosWebAccess CorreiosWebAccessMock;
 	private IAddressRepository AddressRepositoryMock;

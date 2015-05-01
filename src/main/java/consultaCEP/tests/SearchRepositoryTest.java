@@ -12,7 +12,7 @@ import main.java.consultaCEP.interfaces.ISearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SearchRepositoryTests {
+public class SearchRepositoryTest {
 
 	private ISearchRepository repository;
 
@@ -24,7 +24,7 @@ public class SearchRepositoryTests {
 	}
 
 	@Test
-	public void insert_search_should_insert_a_search_in_db() {
+	public void insert_search_should_insert_a_search_in_db_Test() {
 		String cep = "13570-003";
 		Search search = new Search(cep);
 	
