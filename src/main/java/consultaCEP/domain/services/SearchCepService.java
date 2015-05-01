@@ -19,7 +19,7 @@ public class SearchCepService implements ISearchCepService {
 	}
 
 	@Override
-	public Address getAddress(String cep) {
+	public Address getAddress(final String cep) {
 
 		final WebRunnable webRunnable = new WebRunnable(cep);
 		final DbRunnable dbRunnable = new DbRunnable(cep);
