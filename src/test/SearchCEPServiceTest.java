@@ -1,4 +1,4 @@
-package main.java.consultaCEP.tests;
+package test;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
