@@ -22,7 +22,7 @@ public class SearchCepService implements ISearchCepService {
 	@Override
 	public Address getAddress(final String cep) {
 
-		Address result = Cache.get(Address.class, cep);
+		Address result = Cache.getInstance().get(Address.class, cep);
 		if (result != null)
 			return result;
 
@@ -89,7 +89,7 @@ public class SearchCepService implements ISearchCepService {
 			System.out.println("cep: " + cep + " - wb");
 		}
 
-		Cache.put(cep, returnAddress);
+		Cache.getInstance().put(cep, returnAddress);
 		return returnAddress;
 	}
 

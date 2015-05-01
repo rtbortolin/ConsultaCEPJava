@@ -1,13 +1,14 @@
 package main.java.consultaCEP.infra;
 
+import main.java.consultaCEP.interfaces.ICache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
-public class Cache {
+public class Cache implements ICache {
+	private static ICache singletonCache;
+	private net.sf.ehcache.Cache cache;
 
-	private static net.sf.ehcache.Cache cache;
-
-	private static net.sf.ehcache.Cache getCache() {
+	private net.sf.ehcache.Cache getCache() {
 		cache = CacheManager.getInstance().getCache("app");
 		if (cache == null) {
 			CacheManager.create();
@@ -18,17 +19,19 @@ public class Cache {
 		return cache;
 	}
 
-	public static void put(String key, Object obj) {
+	@Override
+	public void put(String key, Object obj) {
 		Element elm = new Element(key, obj);
 		elm.setTimeToLive(86400);
-		
+
 		getCache().put(elm);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
-	public static <T extends Object> T get(Class<T> tclass, String key) {
+	public <T extends Object> T get(Class<T> tclass, String key) {
 		Element elm = getCache().get(key);
-		if(elm == null)
+		if (elm == null)
 			return null;
 		Object obj = elm.getObjectValue();
 		if (obj == null)
@@ -38,5 +41,15 @@ public class Cache {
 			return (T) obj;
 
 		return null;
+	}
+
+	public static ICache getInstance() {
+		if (singletonCache == null)
+			singletonCache = new Cache();
+		return singletonCache;
+	}
+
+	public static void setInstance(ICache cache) {
+		singletonCache = cache;
 	}
 }
