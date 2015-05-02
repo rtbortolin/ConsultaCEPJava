@@ -46,7 +46,6 @@ public class AddressRepository extends BaseRepository implements
 				updateAddress(address);
 			} else
 				connection.getCollection().insert(convertAddress(address));
-
 		} finally {
 			connection.closeConnection();
 		}

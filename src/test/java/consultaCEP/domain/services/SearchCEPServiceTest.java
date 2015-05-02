@@ -1,24 +1,21 @@
-package test.java;
+package test.java.consultaCEP.domain.services;
 
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.isNotNull;
 import main.java.consultaCEP.domain.entities.Address;
 import main.java.consultaCEP.domain.services.SearchCepService;
 import main.java.consultaCEP.infra.Cache;
 import main.java.consultaCEP.interfaces.IAddressRepository;
-import main.java.consultaCEP.interfaces.ICache;
 import main.java.consultaCEP.interfaces.ICorreiosWebAccess;
 import main.java.consultaCEP.interfaces.ISearchCepService;
 
-import org.hamcrest.core.IsNot;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 

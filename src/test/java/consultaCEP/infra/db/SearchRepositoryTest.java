@@ -1,4 +1,4 @@
-package test.java;
+package test.java.consultaCEP.infra.db;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

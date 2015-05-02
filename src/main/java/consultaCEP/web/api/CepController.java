@@ -10,9 +10,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import main.java.consultaCEP.domain.entities.Address;
-import main.java.consultaCEP.domain.services.CorreiosWebAccess;
 import main.java.consultaCEP.domain.services.SearchCepService;
 import main.java.consultaCEP.infra.db.AddressRepository;
+import main.java.consultaCEP.infra.services.CorreiosWebAccess;
 import main.java.consultaCEP.interfaces.ISearchCepService;
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -21,6 +21,10 @@ import org.apache.commons.lang3.time.StopWatch;
 public class CepController {
 
 	private static ISearchCepService service;
+
+	public CepController(ISearchCepService pservice) {
+		service = pservice;
+	}
 
 	public CepController() {
 		if (service == null) {
@@ -36,7 +40,7 @@ public class CepController {
 	public Response getCep(@PathParam("cep") String cep) {
 		StopWatch sw = new StopWatch();
 		sw.start();
-				
+
 		Address address = service.getAddress(cep);
 
 		ResponseBuilder responseBuilder = Response.status(200).entity(address);
@@ -45,7 +49,7 @@ public class CepController {
 		cache.setPrivate(true);
 		responseBuilder.cacheControl(cache);
 		Response corsResponse = createCorsResponse(responseBuilder.build());
-		
+
 		sw.stop();
 		System.out.println("Request time: " + cep + " | " + sw);
 		return corsResponse;

@@ -1,4 +1,4 @@
-package main.java.consultaCEP.domain.services;
+package main.java.consultaCEP.infra.services;
 
 import java.io.*;
 import java.net.*;
@@ -16,8 +16,7 @@ public class CorreiosWebAccess implements ICorreiosWebAccess {
 
 		String html = getHtml(cep);
 
-		if (html.contains("O endereço informado " + cep
-				+ " não foi encontrado."))
+		if (!html.contains("Logradouro(s)"))
 			return null;
 
 		String logradouro = getLogradouro(html);

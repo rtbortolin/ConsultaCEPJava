@@ -1,4 +1,4 @@
-package test.java;
+package test.java.consultaCEP.infra.db;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -15,6 +15,8 @@ import main.java.consultaCEP.interfaces.IAddressRepository;
 import org.junit.Before;
 import org.junit.Test;
 
+import test.java.AddressesMock;
+
 public class AddressRepositoryTest {
 
 	@Before
@@ -26,16 +28,15 @@ public class AddressRepositoryTest {
 
 	@Test
 	public void address_get_should_return_an_address_with_an_existing_cep() {
-		String cep = "13570-003";
-		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "São Carlos", "SP", cep);
+		String cep = "14800-010";
+		Address reference = AddressesMock.get(cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
 
 		repository = new AddressRepository();
 
-		Address address = repository.getAddres("13570-003");
+		Address address = repository.getAddres("14800-010");
 
 		assertNotNull(address);
 		assertNotEquals("", address.getBairro());
@@ -55,9 +56,8 @@ public class AddressRepositoryTest {
 
 	@Test
 	public void save_address_should_persist_a_new_address() {
-		String cep = "13570-003";
-		Address reference = new Address("Rua Professor Paulo Monte Serrat",
-				"Jardim Ricetti", "São Carlos", "SP", cep);
+		String cep = "14800-010";
+		Address reference = AddressesMock.get(cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
@@ -73,13 +73,16 @@ public class AddressRepositoryTest {
 
 	@Test
 	public void save_address_should_update_an_existing_address() {
-		String cep = "13570-003";
-		String logradouro = "Rua Professor Paulo Monte Serrat";
+		String cep = "69005-070";
+		Address reference = AddressesMock.get(cep);
+		
+		String logradouro = reference.getLogradouro();
 		String updatedLogradouro = logradouro + " - updated";
-		String bairro = "Jardim Ricetti";
-		String cidade = "São Carlos";
-		String uf = "SP";
-		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
+		String bairro = reference.getBairro();
+		String cidade = reference.getCidade();
+		String uf = reference.getUf();
+		
+		reference = new Address(logradouro, bairro, cidade, uf, cep);
 
 		IAddressRepository repository = new AddressRepository();
 		repository.saveAddress(reference);
@@ -98,13 +101,16 @@ public class AddressRepositoryTest {
 
 	@Test
 	public void save_address_should_change_update_in_field() {
-		String cep = "13570-003";
-		String logradouro = "Rua Professor Paulo Monte Serrat";
+		String cep = "69005-070";
+		Address reference = AddressesMock.get(cep);
+		
+		String logradouro = reference.getLogradouro();
 		String updatedLogradouro = logradouro + " - updated";
-		String bairro = "Jardim Ricetti";
-		String cidade = "São Carlos";
-		String uf = "SP";
-		Address reference = new Address(logradouro, bairro, cidade, uf, cep);
+		String bairro = reference.getBairro();
+		String cidade = reference.getCidade();
+		String uf = reference.getUf();
+		
+		reference = new Address(logradouro, bairro, cidade, uf, cep);
 
 		Date updatedInDate = reference.getUpdatedIn();
 
