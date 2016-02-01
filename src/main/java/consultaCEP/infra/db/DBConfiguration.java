@@ -5,7 +5,7 @@ public class DBConfiguration {
 	public static String getDbConnectionString(){
 		String connectionString = System.getenv("DB_Connection_String");
 		if (connectionString == null || connectionString.isEmpty()) {
-			connectionString = "mongodb://" + getDbUser() + ":" + getDbPassword() + "@ds053139.mongolab.com:53139/consultacep_dev";
+			connectionString = "mongodb://" + getDbUser() + ":" + getDbPassword() + "@ds053139.mongolab.com:53139/consultacep_dev/?authSource=db1";
 		}		
 		return connectionString;
 	}
