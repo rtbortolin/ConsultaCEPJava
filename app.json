@@ -1,0 +1,29 @@
+{
+  "name": "ConsultaCEPJava",
+  "scripts": {
+  },
+  "env": {
+    "DB_Connection_String": {
+      "required": true
+    },
+    "DB_Name": {
+      "required": true
+    },
+    "DB_Password": {
+      "required": true
+    },
+    "DB_User": {
+      "required": true
+    },
+    "JAVA_OPTS": {
+      "required": true
+    },
+    "PORT": {
+      "required": true
+    }
+  },
+  "addons": [
+    "papertrail",
+    "logentries"
+  ]
+}
