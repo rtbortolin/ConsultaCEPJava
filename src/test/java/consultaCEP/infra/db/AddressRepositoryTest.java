@@ -7,14 +7,13 @@ import static org.junit.Assert.assertNull;
 
 import java.util.Date;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import main.java.consultaCEP.domain.entities.Address;
 import main.java.consultaCEP.infra.db.AddressRepository;
 import main.java.consultaCEP.infra.db.MongoConnection;
 import main.java.consultaCEP.interfaces.IAddressRepository;
-
-import org.junit.Before;
-import org.junit.Test;
-
 import test.java.AddressesMock;
 
 public class AddressRepositoryTest {
@@ -75,13 +74,13 @@ public class AddressRepositoryTest {
 	public void save_address_should_update_an_existing_address() {
 		String cep = "69005-070";
 		Address reference = AddressesMock.get(cep);
-		
+
 		String logradouro = reference.getLogradouro();
 		String updatedLogradouro = logradouro + " - updated";
 		String bairro = reference.getBairro();
 		String cidade = reference.getCidade();
 		String uf = reference.getUf();
-		
+
 		reference = new Address(logradouro, bairro, cidade, uf, cep);
 
 		IAddressRepository repository = new AddressRepository();
@@ -103,13 +102,13 @@ public class AddressRepositoryTest {
 	public void save_address_should_change_update_in_field() {
 		String cep = "69005-070";
 		Address reference = AddressesMock.get(cep);
-		
+
 		String logradouro = reference.getLogradouro();
 		String updatedLogradouro = logradouro + " - updated";
 		String bairro = reference.getBairro();
 		String cidade = reference.getCidade();
 		String uf = reference.getUf();
-		
+
 		reference = new Address(logradouro, bairro, cidade, uf, cep);
 
 		Date updatedInDate = reference.getUpdatedIn();

@@ -1,13 +1,14 @@
 package main.java.consultaCEP.infra.db;
 
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 public class MongoConnection {
 
@@ -15,8 +16,8 @@ public class MongoConnection {
 	private String connectionString = DBConfiguration.getDbConnectionString();
 
 	private MongoClient mongoclient;
-	private DB db;
-	private DBCollection collection;
+	private MongoDatabase db;
+	private MongoCollection<Document> collection;
 
 	private static Map<String, MongoConnection> connections;
 
@@ -25,17 +26,18 @@ public class MongoConnection {
 			connections = new HashMap<String, MongoConnection>();
 
 		MongoConnection connection = connections.get(collection);
-		if (connection == null)
+		if (connection == null) {
 			connection = new MongoConnection(collection);
+		}
 
 		return connection;
 	}
 
-	public DBCollection getCollection() {
+	public MongoCollection<Document> getCollection() {
 		return collection;
 	}
 
-	public DB getDB() {
+	public MongoDatabase getDB() {
 		return db;
 	}
 
@@ -46,22 +48,18 @@ public class MongoConnection {
 	private MongoConnection(String collectionName) {
 		System.out.println("MongoConnection instantiated " + collectionName);
 		openConnection();
-		boolean collectionExists = db.collectionExists(collectionName);
-		if (collectionExists == false) {
-			db.createCollection(collectionName, null);
+		collection = db.getCollection(collectionName);
+		if (collection == null) {
+			db.createCollection(collectionName);
 		}
 		collection = db.getCollection(collectionName);
 	}
 
 	protected boolean openConnection() {
-		try {
-			mongoclient = new MongoClient(new MongoClientURI(connectionString));
-			db = mongoclient.getDB(dbname);
-			return true;
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-			return false;
-		}
+		MongoClientURI uri = new MongoClientURI(connectionString);
+		mongoclient = new MongoClient(uri);
+		db = mongoclient.getDatabase(dbname);
+		return true;
 	}
 
 	protected void closeConnection() {
@@ -70,6 +68,6 @@ public class MongoConnection {
 	}
 
 	public void dropDataBase() {
-		db.dropDatabase();
+		db.drop();
 	}
 }

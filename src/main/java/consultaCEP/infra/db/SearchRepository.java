@@ -4,17 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import com.mongodb.client.MongoCursor;
 
 import main.java.consultaCEP.domain.entities.Search;
 import main.java.consultaCEP.interfaces.ISearchRepository;
 
-public class SearchRepository extends BaseRepository implements
-		ISearchRepository {
+public class SearchRepository extends BaseRepository implements ISearchRepository {
 
 	public SearchRepository() {
 		super("searches");
@@ -24,9 +22,9 @@ public class SearchRepository extends BaseRepository implements
 	public Search insert(Search search) {
 		try {
 			connection.openConnection();
-			DBObject obj = convert(search);
-			connection.getCollection().insert(obj);
-			return fill((BasicDBObject) obj);
+			Document obj = convert(search);
+			connection.getCollection().insertOne(obj);
+			return fill(obj);
 		} finally {
 			connection.closeConnection();
 		}
@@ -37,18 +35,19 @@ public class SearchRepository extends BaseRepository implements
 		List<Search> searches = new ArrayList<Search>();
 
 		connection.openConnection();
-		DBCursor cursor = connection.getCollection().find();
+		MongoCursor<Document> cursor = connection.getCollection().find().iterator();
 		try {
 			while (cursor.hasNext()) {
-				searches.add(fill((BasicDBObject) cursor.next()));
+				searches.add(fill(cursor.next()));
 			}
 		} finally {
 			connection.closeConnection();
 		}
+
 		return searches;
 	}
 
-	private Search fill(BasicDBObject dbObject) {
+	private Search fill(Document dbObject) {
 		ObjectId id = (ObjectId) dbObject.get("_id");
 		Date createdIn = dbObject.getDate("created-in");
 		String cep = dbObject.getString("cep");
@@ -56,11 +55,11 @@ public class SearchRepository extends BaseRepository implements
 		return new Search(id, createdIn, cep);
 	}
 
-	private DBObject convert(Search search) {
-		BasicDBObject dbo = new BasicDBObject();
+	private Document convert(Search search) {
+		Document dbo = new Document();
 
-		dbo.put("cep", search.getCep());
-		dbo.put("created-in", search.getCreatedIn());
+		dbo.append("cep", search.getCep());
+		dbo.append("created-in", search.getCreatedIn());
 
 		return dbo;
 	}

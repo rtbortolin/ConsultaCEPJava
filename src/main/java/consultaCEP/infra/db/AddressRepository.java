@@ -2,37 +2,25 @@ package main.java.consultaCEP.infra.db;
 
 import java.util.Date;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
+import org.bson.Document;
 
 import main.java.consultaCEP.domain.entities.Address;
 import main.java.consultaCEP.interfaces.IAddressRepository;
 
-public class AddressRepository extends BaseRepository implements
-		IAddressRepository {
+public class AddressRepository extends BaseRepository implements IAddressRepository {
 
 	public AddressRepository() {
 		super("addresses");
 
-		connection.getCollection().createIndex(new BasicDBObject("cep", 1),
-				new BasicDBObject("unique", true));
+		if (!indexExists("cep"))
+			connection.getCollection().createIndex(new Document("cep", 1)); // true));
 	}
 
 	@Override
 	public Address getAddres(String cep) {
 		connection.openConnection();
-		DBCursor cursor = connection.getCollection().find(
-				new BasicDBObject("cep", cep));
-		try {
-			while (cursor.hasNext()) {
-				return fillAddress((BasicDBObject) cursor.next());
-			}
-			return null;
-		} finally {
-			cursor.close();
-			connection.closeConnection();
-		}
+		Document document = connection.getCollection().find(new Document("cep", cep)).first();
+		return fillAddress(document);
 	}
 
 	@Override
@@ -45,7 +33,7 @@ public class AddressRepository extends BaseRepository implements
 				address.setCreatedIn(dbAddress.getCreatedIn());
 				updateAddress(address);
 			} else
-				connection.getCollection().insert(convertAddress(address));
+				connection.getCollection().insertOne(convertAddress(address));
 		} finally {
 			connection.closeConnection();
 		}
@@ -53,12 +41,13 @@ public class AddressRepository extends BaseRepository implements
 
 	private void updateAddress(Address address) {
 		address.setUpdatedIn(new Date());
-		connection.getCollection().update(
-				new BasicDBObject("cep", address.getCep()),
-				convertAddress(address));
+		connection.getCollection().updateOne(new Document("cep", address.getCep()),
+				new Document("$set", convertAddress(address)));
 	}
 
-	private Address fillAddress(BasicDBObject dbObject) {
+	private Address fillAddress(Document dbObject) {
+		if (dbObject == null)
+			return null;
 		String logradouro = dbObject.getString("logradouro");
 		String cep = dbObject.getString("cep");
 		String bairro = dbObject.getString("bairro");
@@ -73,16 +62,16 @@ public class AddressRepository extends BaseRepository implements
 		return address;
 	}
 
-	private DBObject convertAddress(Address address) {
-		BasicDBObject dbo = new BasicDBObject();
+	private Document convertAddress(Address address) {
+		Document dbo = new Document();
 
-		dbo.put("cep", address.getCep());
-		dbo.put("logradouro", address.getLogradouro());
-		dbo.put("bairro", address.getBairro());
-		dbo.put("cidade", address.getCidade());
-		dbo.put("uf", address.getUf());
-		dbo.put("created-in", address.getCreatedIn());
-		dbo.put("updated-in", address.getUpdatedIn());
+		dbo.append("cep", address.getCep());
+		dbo.append("logradouro", address.getLogradouro());
+		dbo.append("bairro", address.getBairro());
+		dbo.append("cidade", address.getCidade());
+		dbo.append("uf", address.getUf());
+		dbo.append("created-in", address.getCreatedIn());
+		dbo.append("updated-in", address.getUpdatedIn());
 
 		return dbo;
 	}
