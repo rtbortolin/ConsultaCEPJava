@@ -41,6 +41,7 @@
 					if (data == null) {
 						$('#error').html('CEP informado não foi encontrado.');
 						$('#error').show();
+						return;
 					}
 					$('#lblCep').html(data.cep);
 					$('#lblLogradouro').html(data.logradouro);
